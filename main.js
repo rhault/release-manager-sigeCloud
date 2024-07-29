@@ -1,5 +1,6 @@
-const fetch = (...args) =>
+/* const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
+ */
 
 const params = new URLSearchParams({
   codigo: "22902",
