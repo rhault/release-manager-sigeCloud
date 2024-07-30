@@ -1,12 +1,13 @@
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
+import { useState } from "react";
 
 const ReleaseContext = createContext()
 
 const ReleaseProvider = ({children}) => {
-  const filter = []
+  const [filterReleaseData, setFilterReleaseData] = useState({})
 
   return(
-    <ReleaseContext.Provider value={filter}>
+    <ReleaseContext.Provider value={{filterReleaseData, setFilterReleaseData}}>
       {children}
     </ReleaseContext.Provider>
   )

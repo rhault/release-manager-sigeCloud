@@ -1,26 +1,53 @@
 import { Calendar } from "@/components/ui/calendar"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {Button} from "@/components/ui/button"
+import {ReleaseContext} from "@/context/context"
 
 const Filter = () => {
+  const {setFilterReleaseData} = useContext(ReleaseContext)
   const [date, setDate] = useState(new Date())
   const [code, setCode] = useState('')
   const [client, setClient] = useState('')
   const [accountPlan, setAccountPlan] = useState('')
   const [accountBank, setAccountBank] = useState('')
-  const [propertiesFilter, setPropertiesFilter] = useState({})
+
+  const getReleases = async (params) => {
+    try {
+      const releases = await fetch(
+        `https://api.sigecloud.com.br/request/Lancamentos/Pesquisar?${params}`,
+        {
+          method: "Get",
+          headers: {
+            Accept: "application/json",
+            "Authorization-Token": "",
+            User: "",
+            App: "API",
+          },
+        }
+      );
+  
+      if (!releases) {
+        throw new Error("Error");
+      }
+  
+      const data = await releases.json();
+      console.log(data[0]["PlanoDeConta"]);
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  }
 
   const handlerFilter = () => {
-    const newPropertiesFilter = {
+    const newPropertiesFilter = new URLSearchParams({
       codigo: code,
       clienteFornecedor: client,
       planoDeContas: accountPlan,
       contaBancaria: accountBank,
-    }
+    })
 
-    setPropertiesFilter(newPropertiesFilter)
+    getReleases(newPropertiesFilter)
     console.log(newPropertiesFilter)
   }
 
