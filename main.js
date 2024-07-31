@@ -1,16 +1,15 @@
 /* const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
  */
-
 const params = new URLSearchParams({
   codigo: "22902",
-  /* clienteFornecedor: "",
+  clienteFornecedor: "",
   planoDeContas: "",
-  formaDePagamento: "", */
-  /* filtrarPor: "QUITACAO", */
-  /* contaBancaria: "", */
-  /* dataInicial: "2024-07-25",
-  dataFinal: "2024-07-25", */
+  formaDePagamento: "",
+  filtrarPor: "QUITACAO", 
+  contaBancaria: "",
+  dataInicial: "2024-07-25",
+  dataFinal: "2024-07-25"
 }).toString();
 
 const data = {
@@ -62,8 +61,8 @@ const getReleases = async () => {
         method: "Get",
         headers: {
           Accept: "application/json",
-          "Authorization-Token": "",
-          User: "",
+          "Authorization-Token":"" ,
+        User: "",
           App: "API",
         },
       }
@@ -74,7 +73,7 @@ const getReleases = async () => {
     }
 
     const data = await releases.json();
-    console.log(data[0]["PlanoDeConta"]);
+    console.log(data);
   } catch (error) {
     console.log("Error:", error);
   }
@@ -88,7 +87,7 @@ const updateReleases = async (newReleases) => {
         "Content-Type": "application/json",
         Accept: "application/json",
         "Authorization-Token": "",
-        User: "",
+        User:"" ,
         App: "API",
       },
       body: JSON.stringify(newReleases),
@@ -100,5 +99,5 @@ const updateReleases = async (newReleases) => {
   }
 };
 
-/* getReleases(); */
-updateReleases(data);
+ getReleases(); 
+//updateReleases(data);

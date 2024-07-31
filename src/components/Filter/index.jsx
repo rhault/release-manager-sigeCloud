@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label"
 import { useContext, useState } from "react";
 import {Button} from "@/components/ui/button"
 import {ReleaseContext} from "@/context/context"
+import {getToken, getUser} from "@/auth"
 
 const Filter = () => {
   const {setFilterReleaseData} = useContext(ReleaseContext)
@@ -16,9 +17,9 @@ const Filter = () => {
   const getReleases = async (params) => {
     try {
       const releases = await fetch(
-        `https://api.sigecloud.com.br/request/Lancamentos/Pesquisar?${params}`,
+        `https://api.sigecloud.com.br/request/Lancamentos/Pesquisar?${params.toString()}`,
         {
-          method: "Get",
+          method: "GET",
           headers: {
             Accept: "application/json",
             "Authorization-Token": "",
@@ -29,12 +30,14 @@ const Filter = () => {
       );
   
       if (!releases) {
-        throw new Error("Error");
+        throw new Error("Network response was not ok");
       }
   
       const data = await releases.json();
+      setFilterReleaseData(data)
       console.log(data[0]["PlanoDeConta"]);
     } catch (error) {
+      console.log('error aqui')
       console.log("Error:", error);
     }
   }
