@@ -4,7 +4,7 @@ import { useState } from "react";
 const ReleaseContext = createContext()
 
 const ReleaseProvider = ({children}) => {
-  const [filterReleaseData, setFilterReleaseData] = useState({})
+  const [filterReleaseData, setFilterReleaseData] = useState([])
 
   return(
     <ReleaseContext.Provider value={{filterReleaseData, setFilterReleaseData}}>

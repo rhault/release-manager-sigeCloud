@@ -17,13 +17,13 @@ const Filter = () => {
   const getReleases = async (params) => {
     try {
       const releases = await fetch(
-        `https://api.sigecloud.com.br/request/Lancamentos/Pesquisar?${params.toString()}`,
+        `/api/request/Lancamentos/Pesquisar?${params.toString()}`,
         {
           method: "GET",
           headers: {
             Accept: "application/json",
-            "Authorization-Token": "",
-            User: "",
+            "Authorization-Token": getToken(),
+            User: getUser(),
             App: "API",
           },
         }
@@ -35,7 +35,7 @@ const Filter = () => {
   
       const data = await releases.json();
       setFilterReleaseData(data)
-      console.log(data[0]["PlanoDeConta"]);
+      console.log(data);
     } catch (error) {
       console.log('error aqui')
       console.log("Error:", error);
