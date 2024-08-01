@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Filter from "@/components/Filter";
 import { ReleaseContext, ReleaseProvider } from "@/context/context";
 import TableDashboard from "@/components/Table";
+import Modifier from "@/components/Modifier"
 
 function App() {
   return (
@@ -30,7 +31,9 @@ function App() {
                 <TabsContent value="filter" className="w-full">
                   <Filter />
                 </TabsContent>
-                <TabsContent value="modific">value2</TabsContent>
+                <TabsContent value="modific">
+                  <Modifier/>
+                </TabsContent>
               </Tabs>
             </div>
           </main>

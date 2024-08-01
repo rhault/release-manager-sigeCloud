@@ -11,7 +11,11 @@ import {
 
 const TableDashboard = () => {
   const { filterReleaseData } = useContext(ReleaseContext);
-
+  const optionDateShort = {
+    day: '2-digit',
+    month: '2-digit',  
+    year: '2-digit',   
+  };
   const headerPropertyTable = [
     "Codigo",
     "Vencimento",
@@ -20,8 +24,8 @@ const TableDashboard = () => {
     "Situação",
     "Plano de Conta",
     "Cliente",
+    "F pagamento",
     "Banco",
-    "Valor",
   ];
 
   return (
@@ -38,13 +42,14 @@ const TableDashboard = () => {
           {filterReleaseData.map((item) => (
             <TableRow key={item.Codigo}>
               <TableCell>{item.Codigo}</TableCell>
-              <TableCell>{item.DataVencimento}</TableCell>
-              <TableCell>{item.Cliente}</TableCell>
+              <TableCell>{item.DataVencimento.slice(0,10)}</TableCell>
+              <TableCell>{item.DataQuitacao.slice(0,10)}</TableCell>
+              <TableCell>R$ {item.Valor}</TableCell>
+              <TableCell>{item.Valor === item.TotalRecebido ? 'Pago' : 'Aberto'}</TableCell>
               <TableCell>{item.PlanoDeConta}</TableCell>
+              <TableCell>{item.Cliente}</TableCell>
               <TableCell>{item.FormaPagamento}</TableCell>
               <TableCell>{item.ContaBancaria}</TableCell>
-              <TableCell>{item.Valor}</TableCell>
-              <TableCell>{item.Valor}</TableCell>
             </TableRow>
           ))}
         </TableBody>
